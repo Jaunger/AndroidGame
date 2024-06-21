@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         trivia_BTN_right.setOnClickListener(v -> movePlayerRight());
     }
 
-    private void movePlayerRight() { movePlayer(-1);}
+    private void movePlayerRight() { movePlayer(1);}
 
     private void movePlayerLeft() { movePlayer(-1);}
 
