@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton trivia_BTN_right;
     private int playerLives[];
     private MediaPlayer mediaPlayer;
-    private MediaPlayer background;
+    private boolean isPaused = false;
     private Context context;
     private int position;
 
@@ -65,19 +65,32 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        isPaused = false;
+
     }
 
 
 
 
     private void tick() {
-        gameManager.MoveDangers();
-        position = gameManager.makeNewDanger();
-        if(gameManager.playerHit())
-            mediaPlayer.start();
-        updateDangersUI();
-        updateLivesUI();
+        if (!isPaused) {
+            gameManager.MoveDangers();
+            position = gameManager.makeNewDanger();
+            if (gameManager.playerHit())
+                mediaPlayer.start();
+            updateDangersUI();
+            updateLivesUI();
+        }
     }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isPaused = true;
+    }
+
+
 
     private void updateDangersUI() {
         for (int i = 0; i < trivia_IMG_dangers.length-1; i++) {
