@@ -26,10 +26,9 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton trivia_BTN_left;
     private MaterialButton trivia_BTN_right;
     private int[] playerLives;
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer[] mediaPlayer;
     private boolean isPaused = false;
-    private Context context;
-
+    int rows,cols;
     private GameManager gameManager;
     private final int DELAY = 1000;
 
@@ -40,10 +39,11 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         findViews();
-
         gameManager = new GameManager(4, 3);
-        mediaPlayer = MediaPlayer.create(this, R.raw.hit_sound);
-        initiateMatrix(4,3);
+        mediaPlayer = new MediaPlayer[]{ MediaPlayer.create(this, R.raw.hit_sound),MediaPlayer.create(this, R.raw.lose_sound)};
+        rows = 4;
+        cols = 3;
+        initiateMatrix(rows,cols);
         setUpControls();
 
         handler.postDelayed(runnable, DELAY);
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setUpControls() {
+    private void setUpControls() {          //TODO: change to general with left / right
         trivia_BTN_left.setOnClickListener(v -> movePlayer(-1));
         trivia_BTN_right.setOnClickListener(v -> movePlayer(1));
     }
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             gameManager.MoveDangers();
             gameManager.makeNewDanger();
             if (gameManager.playerHit())
-                mediaPlayer.start();
+                mediaPlayer[0].start();
             updateDangersUI();
             updateLivesUI();
         }
@@ -145,6 +145,10 @@ public class MainActivity extends AppCompatActivity {
     private void lose() {
         Toast.makeText(this, "You lose, lets try that again", Toast.LENGTH_SHORT).show();
         vibrate();
+        mediaPlayer[1].start();
+        Runnable v = () -> {gameManager.reset(); isPaused=false;};
+        isPaused = true;
+        handler.postDelayed(v,mediaPlayer[1].getDuration());
         gameManager.reset();
         updateDangersUI();
     }
