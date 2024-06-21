@@ -2,11 +2,9 @@ package com.example.danielraby_hm1;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,8 +17,6 @@ import com.google.android.material.button.MaterialButton;
 
 import android.os.Vibrator;
 
-import java.util.Random;
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,11 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatImageView[] trivia_IMG_hearts;
     private MaterialButton trivia_BTN_left;
     private MaterialButton trivia_BTN_right;
-    private int playerLives[];
+    private int[] playerLives;
     private MediaPlayer mediaPlayer;
     private boolean isPaused = false;
     private Context context;
-    private int position;
 
     private GameManager gameManager;
     private final int DELAY = 1000;
@@ -49,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         gameManager = new GameManager(4, 3);
         mediaPlayer = MediaPlayer.create(this, R.raw.hit_sound);
         initiateMatrix(4,3);
-        setUpControlls();
+        setUpControls();
 
         handler.postDelayed(runnable, DELAY);
 
@@ -57,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setUpControlls() {
+    private void setUpControls() {
         trivia_BTN_left.setOnClickListener(v -> movePlayer(-1));
         trivia_BTN_right.setOnClickListener(v -> movePlayer(1));
     }
@@ -75,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private void tick() {
         if (!isPaused) {
             gameManager.MoveDangers();
-            position = gameManager.makeNewDanger();
+            gameManager.makeNewDanger();
             if (gameManager.playerHit())
                 mediaPlayer.start();
             updateDangersUI();
@@ -108,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     private final Handler handler = new Handler();
 
-    private Runnable runnable = new Runnable() {
+    private final Runnable runnable = new Runnable() {
         public void run() {
             tick();
             handler.postDelayed(runnable, DELAY);
@@ -133,8 +128,8 @@ public class MainActivity extends AppCompatActivity {
     private void updateLivesUI() {
         int SZ = trivia_IMG_hearts.length;
 
-        for (int i = 0; i < SZ; i++) {
-            trivia_IMG_hearts[i].setVisibility(View.VISIBLE);
+        for (AppCompatImageView triviaImgHeart : trivia_IMG_hearts) {
+            triviaImgHeart.setVisibility(View.VISIBLE);
         }
 
         for (int i = 0; i < SZ - gameManager.getLives(); i++) {
@@ -194,12 +189,7 @@ public class MainActivity extends AppCompatActivity {
     private void vibrate(){
         Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 // Vibrate for 500 milliseconds
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            //deprecated in API 26
-            v.vibrate(500);
-        }
+        v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
 }
