@@ -52,10 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setUpControls() {          //TODO: change to general with left / right
-        trivia_BTN_left.setOnClickListener(v -> movePlayer(-1));
-        trivia_BTN_right.setOnClickListener(v -> movePlayer(1));
+    private void setUpControls() {
+        trivia_BTN_left.setOnClickListener(v -> movePlayerLeft());
+        trivia_BTN_right.setOnClickListener(v -> movePlayerRight());
     }
+
+    private void movePlayerRight() { movePlayer(-1);}
+
+    private void movePlayerLeft() { movePlayer(-1);}
+
 
     @Override
     protected void onResume() {
