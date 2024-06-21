@@ -12,7 +12,6 @@ public class GameManager {
     private boolean isHit = false;
     private int lives = 3;
 
-        //TODO: change matrix to 0's and 1's
     public GameManager(int rows, int cols) {
         images = new int[]{R.drawable.ic_bluesnail,R.drawable.ic_orangemush,R.drawable.ic_slime};
 

@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         trivia_BTN_left.setOnClickListener(v -> movePlayer(-1));
         trivia_BTN_right.setOnClickListener(v -> movePlayer(1));
     }
-    //TODO: maybe add stop and start when paused and resumed
 
     @Override
     protected void onResume() {
