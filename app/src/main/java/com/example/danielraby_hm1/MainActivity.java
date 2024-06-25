@@ -40,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViews();
         gameManager = new GameManager(4, 3);
-        mediaPlayer = new MediaPlayer[]{ MediaPlayer.create(this, R.raw.hit_sound),MediaPlayer.create(this, R.raw.lose_sound)};
+        mediaPlayer = new MediaPlayer[]{ MediaPlayer.create(this, R.raw.hit_sound),
+                MediaPlayer.create(this, R.raw.lose_sound),
+                MediaPlayer.create(this, R.raw.move)};
         rows = 4;
         cols = 3;
         initiateMatrix(rows,cols);
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updatePositionUI(int i) {
         int pos = gameManager.getPlayerPosition();
+        mediaPlayer[2].start();
         trivia_IMG_dangers[trivia_IMG_dangers.length-1][pos - i].setVisibility(View.INVISIBLE);
         trivia_IMG_dangers[trivia_IMG_dangers.length-1][pos].setImageResource(playerLives[gameManager.getLives()-1]);
         trivia_IMG_dangers[trivia_IMG_dangers.length-1][pos].setVisibility(View.VISIBLE);
