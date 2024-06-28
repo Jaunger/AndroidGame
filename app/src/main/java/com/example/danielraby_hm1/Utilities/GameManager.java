@@ -1,4 +1,8 @@
-package com.example.danielraby_hm1;
+package com.example.danielraby_hm1.Utilities;
+
+import com.example.danielraby_hm1.Entities.Danger;
+import com.example.danielraby_hm1.Entities.Player;
+import com.example.danielraby_hm1.R;
 
 import java.util.ArrayList;
 import java.util.Random;

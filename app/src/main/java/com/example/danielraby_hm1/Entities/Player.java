@@ -1,16 +1,13 @@
-package com.example.danielraby_hm1;
+package com.example.danielraby_hm1.Entities;
 
-public class Danger {
-
+public class Player {
     private int image;
     private boolean active;
 
 
-    public int getImage() {
-        return image;
-    }
 
-    public Danger setImage(int image) {
+
+    public Player setImage(int image) {
         this.image = image;
         return this;
     }
@@ -19,7 +16,7 @@ public class Danger {
         return active;
     }
 
-    public Danger setActive(boolean active) {
+    public Player setActive(boolean active) {
         this.active = active;
         return this;
     }
