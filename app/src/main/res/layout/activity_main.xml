@@ -80,13 +80,117 @@
                 android:layout_height="0dp"/>
 
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/top4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
 
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/top5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
 
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
 
+            android:layout_weight="1"
+            android:padding="16dp"
+
+            >
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/top6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/top7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/top8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/top9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/top10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
 
@@ -137,18 +241,6 @@
                 android:layout_width="12dp"
                 android:layout_height="0dp"/>
 
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:padding="16dp"
-           >
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mid4"
                 android:layout_width="match_parent"
@@ -175,10 +267,72 @@
                 android:layout_height="0dp"/>
 
 
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:padding="16dp"
+           >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mid6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mid7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mid8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mid9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mid10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -242,6 +396,111 @@
                 android:layout_height="0dp"/>
 
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bot4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bot5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:padding="16dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bot6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"
+                />
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bot7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bot8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bot9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bot10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_bomb"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -283,6 +542,31 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/player3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/player0_idle"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/player4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/player0_idle"/>
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp"/>
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/player5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -339,14 +623,110 @@
             app:iconSize="52dp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+
+
+</LinearLayout>
+
+
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="16dp"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/trivia_LBL_Distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@id/trivia_LAY_heartLayout"
+            android:layout_alignBottom="@id/trivia_LAY_heartLayout"
+
+            android:paddingTop="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="Distance: "/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/trivia_LBL_DistanceScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/trivia_LAY_heartLayout"
+            android:layout_alignBottom="@id/trivia_LAY_heartLayout"
+            android:paddingTop="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="000"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/trivia_LBL_ScoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@id/trivia_LAY_heartLayout"
+            android:layout_alignBottom="@id/trivia_LAY_heartLayout"
+
+            android:paddingTop="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="Score: "/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/trivia_LBL_Score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/trivia_LAY_heartLayout"
+            android:layout_alignBottom="@id/trivia_LAY_heartLayout"
+            android:paddingTop="8dp"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:text="000"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/trivia_LAY_heartLayout"
+        android:paddingEnd="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="16dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:orientation="horizontal">
+
+
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/trivia_IMG_heart1"

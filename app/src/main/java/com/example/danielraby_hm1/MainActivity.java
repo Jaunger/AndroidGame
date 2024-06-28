@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textview.MaterialTextView;
 
 import android.os.Vibrator;
 
@@ -21,8 +22,12 @@ import android.os.Vibrator;
 public class MainActivity extends AppCompatActivity {
 
 
+    private static final int ENEMY = 1;
+    private static final int REWARD = 2;
     private AppCompatImageView[][] trivia_IMG_dangers;
     private AppCompatImageView[] trivia_IMG_hearts;
+    private MaterialTextView trivia_LBL_score;
+    private MaterialTextView trivia_LBL_DistanceScore;
     private MaterialButton trivia_BTN_left;
     private MaterialButton trivia_BTN_right;
     private int[] playerLives;
@@ -39,12 +44,14 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         findViews();
-        gameManager = new GameManager(4, 3);
+        rows = 6;
+        cols = 5;
+        gameManager = new GameManager(rows, cols);
         mediaPlayer = new MediaPlayer[]{ MediaPlayer.create(this, R.raw.hit_sound),
                 MediaPlayer.create(this, R.raw.lose_sound),
-                MediaPlayer.create(this, R.raw.move)};
-        rows = 4;
-        cols = 3;
+                MediaPlayer.create(this, R.raw.move),
+                MediaPlayer.create(this, R.raw.reward_sound)};
+
         initiateMatrix(rows,cols);
         setUpControls();
 
@@ -76,13 +83,24 @@ public class MainActivity extends AppCompatActivity {
 
     private void tick() {
         if (!isPaused) {
+            gameManager.incrementScore();
             gameManager.MoveDangers();
             gameManager.makeNewDanger();
-            if (gameManager.playerHit())
+            int isHit = gameManager.playerHit();
+            if (isHit == ENEMY) {
                 mediaPlayer[0].start();
+                updateLivesUI();
+            }
+            else if(isHit == REWARD) //TODO: 2 rewards in a row dont make sound
+                mediaPlayer[3].start();
+            updateScoresUI();
             updateDangersUI();
-            updateLivesUI();
         }
+    }
+
+    private void updateScoresUI() {
+        trivia_LBL_DistanceScore.setText(String.valueOf(gameManager.getDistance()));
+        trivia_LBL_score.setText(String.valueOf(gameManager.getScore()));
     }
 
 
@@ -151,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void lose() {
-        Toast.makeText(this, "You lose, lets try that again", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You lose \n Score: " + gameManager.getScore() +
+                ", Distance: " + gameManager.getDistance(), Toast.LENGTH_SHORT).show();
         vibrate();
         mediaPlayer[1].start();
         Runnable v = () -> {gameManager.reset(); isPaused=false;};
@@ -159,24 +178,29 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(v,mediaPlayer[1].getDuration());
         gameManager.reset();
         updateDangersUI();
+        updateScoresUI();
     }
 
     private void initiateMatrix(int rows, int cols){
-        trivia_IMG_dangers[trivia_IMG_dangers.length-1][0].setImageResource(playerLives[gameManager.getLives()-1]);
-        trivia_IMG_dangers[trivia_IMG_dangers.length-1][1].setImageResource(playerLives[gameManager.getLives()-1]);
-        trivia_IMG_dangers[trivia_IMG_dangers.length-1][2].setImageResource(playerLives[gameManager.getLives()-1]);
+
+        for (int i = 0; i < cols; i++) {
+            trivia_IMG_dangers[trivia_IMG_dangers.length-1][i].setImageResource(playerLives[gameManager.getLives()-1]);
+        }
+
 
         for (int i = 0; i <= rows; i++) {
             for (int j = 0; j < cols; j++) {
                 trivia_IMG_dangers[i][j].setVisibility(View.INVISIBLE);
             }
         }
-       trivia_IMG_dangers[rows][cols%2].setVisibility(View.VISIBLE);
+       trivia_IMG_dangers[rows][(cols%2)+1].setVisibility(View.VISIBLE);
     }
 
     private void findViews() {
         trivia_BTN_left = findViewById(R.id.trivia_BTN_left);
         trivia_BTN_right = findViewById(R.id.trivia_BTN_right);
+        trivia_LBL_score = findViewById(R.id.trivia_LBL_Score);
+        trivia_LBL_DistanceScore = findViewById(R.id.trivia_LBL_DistanceScore);
 
         trivia_IMG_hearts = new AppCompatImageView[] {
                 findViewById(R.id.trivia_IMG_heart1),
@@ -186,11 +210,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         trivia_IMG_dangers = new AppCompatImageView[][]{
-                {findViewById(R.id.top1),findViewById(R.id.top2),findViewById(R.id.top3)},
-                {findViewById(R.id.mid1),findViewById(R.id.mid2),findViewById(R.id.mid3)},
-                {findViewById(R.id.mid4),findViewById(R.id.mid5),findViewById(R.id.mid6)},
-                {findViewById(R.id.bot1),findViewById(R.id.bot2),findViewById(R.id.bot3)},
-                {findViewById(R.id.player1),findViewById(R.id.player2),findViewById(R.id.player3)}
+                {findViewById(R.id.top1),findViewById(R.id.top2),findViewById(R.id.top3),findViewById(R.id.top4),findViewById(R.id.top5)},
+                {findViewById(R.id.top6),findViewById(R.id.top7),findViewById(R.id.top8),findViewById(R.id.top9),findViewById(R.id.top10)},
+                {findViewById(R.id.mid1),findViewById(R.id.mid2),findViewById(R.id.mid3),findViewById(R.id.mid4),findViewById(R.id.mid5)},
+                {findViewById(R.id.mid6),findViewById(R.id.mid7),findViewById(R.id.mid8),findViewById(R.id.mid9),findViewById(R.id.mid10)},
+                {findViewById(R.id.bot1),findViewById(R.id.bot2),findViewById(R.id.bot3),findViewById(R.id.bot4),findViewById(R.id.bot5)},
+                {findViewById(R.id.bot6),findViewById(R.id.bot7),findViewById(R.id.bot8),findViewById(R.id.bot9),findViewById(R.id.bot10)},
+                {findViewById(R.id.player1),findViewById(R.id.player2),findViewById(R.id.player3),findViewById(R.id.player4),findViewById(R.id.player5)}
 
 
         };
