@@ -179,7 +179,10 @@ public class MainActivity extends AppCompatActivity {
         if (gameManager.getLives() == 0) {
             lose();
         }
-        trivia_IMG_dangers[trivia_IMG_dangers.length-1][gameManager.getPlayerPosition()].setImageResource(playerLives[gameManager.getLives()-1]);
+        for (int i = 0; i < 5; i++) {
+            trivia_IMG_dangers[trivia_IMG_dangers.length-1][i].setImageResource(playerLives[gameManager.getLives()-1]);
+
+        }
 
 
     }
