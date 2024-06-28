@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
 
+import com.example.danielraby_hm1.Interfaces.MoveCallback;
+import com.example.danielraby_hm1.Utilities.MoveDetector;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatImageView[] trivia_IMG_hearts;
     private MaterialTextView trivia_LBL_score;
     private MaterialTextView trivia_LBL_DistanceScore;
+
     private MaterialButton trivia_BTN_left;
     private MaterialButton trivia_BTN_right;
     private int[] playerLives;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isPaused = false;
     int rows,cols;
     private GameManager gameManager;
+    private MoveDetector moveDetector;
     private final int DELAY = 1000;
 
 
@@ -62,24 +66,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpControls() {
-        trivia_BTN_left.setOnClickListener(v -> movePlayerLeft());
-        trivia_BTN_right.setOnClickListener(v -> movePlayerRight());
+
+        trivia_BTN_left.setOnClickListener(v -> updatePositionUI(-1));
+        trivia_BTN_right.setOnClickListener(v ->  updatePositionUI(1));
+
+
+/*
+        moveDetector = new MoveDetector(this,
+                new MoveCallback() {
+                    @Override
+                    public void moveLeft() {
+                        updatePositionUI(-1);
+                    }
+
+                    @Override
+                    public void moveRight() {
+                        updatePositionUI(1);
+                    }
+                });
+
+ */
     }
-
-    private void movePlayerRight() { movePlayer(1);}
-
-    private void movePlayerLeft() { movePlayer(-1);}
-
 
     @Override
     protected void onResume() {
         super.onResume();
+       // moveDetector.start();
         isPaused = false;
 
     }
 
 
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //    moveDetector.stop();
+        isPaused = true;
+    }
 
     private void tick() {
         if (!isPaused) {
@@ -104,11 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        isPaused = true;
-    }
+
 
 
 
@@ -136,18 +155,14 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    private void movePlayer(int i) {
-        gameManager.movePlayer(i);
-        updatePositionUI(i);
-    }
-
-    private void updatePositionUI(int i) {
-        int pos = gameManager.getPlayerPosition();
-        mediaPlayer[2].start();
-        trivia_IMG_dangers[trivia_IMG_dangers.length-1][pos - i].setVisibility(View.INVISIBLE);
-        trivia_IMG_dangers[trivia_IMG_dangers.length-1][pos].setImageResource(playerLives[gameManager.getLives()-1]);
-        trivia_IMG_dangers[trivia_IMG_dangers.length-1][pos].setVisibility(View.VISIBLE);
-
+    private void updatePositionUI(int move) {
+        gameManager.movePlayer(move);
+        for (int i = 0; i < cols; i++) {
+            trivia_IMG_dangers[rows][i].setVisibility(i == gameManager.getPlayerPosition() ? View.VISIBLE : View.INVISIBLE);
+        }
+        if(gameManager.getHasMoved())
+            mediaPlayer[2].start();
+        gameManager.setHasMoved(false);
     }
 
 

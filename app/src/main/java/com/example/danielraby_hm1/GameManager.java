@@ -12,6 +12,7 @@ public class GameManager {
 
     private ArrayList<Player> playerPos = new ArrayList<>();
     private int isHit;
+    private boolean hasMoved;
     private int distance = 0;
     private int lives = 3;
     private int score = 0;
@@ -57,7 +58,10 @@ public class GameManager {
         if(cur+i > -1 && cur+i < dangersMatrix[0].length) {
             playerPos.get(cur).setActive(false);
             playerPos.get(cur + i).setActive(true);
+            hasMoved = true;
+            return;
         }
+       hasMoved = false;
     }
 
     public int getPlayerPosition() {
@@ -146,4 +150,15 @@ public class GameManager {
     }
 
     public int getScore() { return score;}
+
+
+    public boolean getHasMoved() {
+        return hasMoved;
+    }
+
+    public void setHasMoved(boolean hasMoved) {
+        this.hasMoved = hasMoved;
+    }
+
+
 }
