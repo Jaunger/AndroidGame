@@ -36,10 +36,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        menu_BTN_sensors.setOnClickListener(v -> { type = SENSORS;});
-        menu_BTN_buttons.setOnClickListener(v -> { type = BUTTONS;});
-        menu_BTN_slow.setOnClickListener(v -> { Delay = 1000;});
-        menu_BTN_fast.setOnClickListener(v -> { Delay = 500;});
+        menu_BTN_sensors.setOnClickListener(v -> type = SENSORS);
+        menu_BTN_buttons.setOnClickListener(v -> type = BUTTONS);
+        menu_BTN_slow.setOnClickListener(v -> Delay = 1000);
+        menu_BTN_fast.setOnClickListener(v -> Delay = 500);
 
         menu_BTN_launch.setOnClickListener((view) -> {
             Intent intent = new Intent(this, GameActivity.class);

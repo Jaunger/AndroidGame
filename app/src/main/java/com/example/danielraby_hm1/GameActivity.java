@@ -59,7 +59,7 @@ public class GameActivity extends AppCompatActivity {
         mediaPlayer = new MediaPlayer[]{ MediaPlayer.create(this, R.raw.hit_sound),
                 MediaPlayer.create(this, R.raw.lose_sound),
                 MediaPlayer.create(this, R.raw.move),
-                MediaPlayer.create(this, R.raw.reward_sound)};
+                MediaPlayer.create(this, R.raw.reward_soundv2)};
         Intent prev = getIntent();
         DELAY = prev.getExtras().getInt("delay");
         initiateMatrix(rows,cols);
