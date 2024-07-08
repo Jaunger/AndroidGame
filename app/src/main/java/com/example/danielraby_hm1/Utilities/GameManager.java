@@ -1,9 +1,21 @@
 package com.example.danielraby_hm1.Utilities;
 
+
+import android.location.Location;
+import android.location.LocationManager;
+
+import androidx.annotation.NonNull;
+
 import com.example.danielraby_hm1.Entities.Danger;
 import com.example.danielraby_hm1.Entities.Player;
 import com.example.danielraby_hm1.Model.Score;
 import com.example.danielraby_hm1.R;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -46,6 +58,8 @@ public class GameManager {
             }
 
         }
+
+
     }
     public int getDistance() { return score.getDistance();}
 
@@ -158,6 +172,8 @@ public class GameManager {
     public int getScore() { return score.getScore();}
 
 
+    public Score getScorescore(){ return score; }
+
     public boolean getHasMoved() {
         return hasMoved;
     }
@@ -168,6 +184,7 @@ public class GameManager {
 
 
     public void updateScoreboard() {
+
         ScoreSharedPreferences scoreSharedPreferences = ScoreSharedPreferences.getInstance();
         ArrayList<Score> scores = scoreSharedPreferences.readScore();
         if(scores == null) scores = new ArrayList<>();

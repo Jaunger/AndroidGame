@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.danielraby_hm1.Interfaces.ScoreCallBack;
 import com.example.danielraby_hm1.Model.Score;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHol
         Score score = getItem(position);
         holder.score_LBL_score.setText(String.valueOf(score.getScore()));
         holder.score_LBL_distance.setText(String.valueOf(score.getDistance()));
-        holder.score_LBL_main.setOnClickListener(v -> {
+        holder.score_img.setOnClickListener(v -> {
             if(scoreCallBack != null){
                 scoreCallBack.onScoreClick(score);
             }
@@ -59,13 +60,13 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHol
     public static class ScoreViewHolder extends RecyclerView.ViewHolder {
         public final MaterialTextView score_LBL_score;
         public final MaterialTextView score_LBL_distance;
-        public final ConstraintLayout score_LBL_main;
+        public final MaterialButton score_img;
 
         public ScoreViewHolder(@NonNull View itemView) {
             super(itemView);
              score_LBL_score = itemView.findViewById(R.id.score_LBL_score);
              score_LBL_distance = itemView.findViewById(R.id.score_LBL_distance);
-             score_LBL_main = itemView.findViewById(R.id.main);
+             score_img = itemView.findViewById(R.id.score_img);
 
         }
 

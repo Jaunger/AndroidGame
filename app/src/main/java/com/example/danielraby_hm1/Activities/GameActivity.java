@@ -2,6 +2,7 @@ package com.example.danielraby_hm1.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -18,6 +20,12 @@ import com.example.danielraby_hm1.Interfaces.MoveCallback;
 import com.example.danielraby_hm1.R;
 import com.example.danielraby_hm1.Utilities.GameManager;
 import com.example.danielraby_hm1.Utilities.MoveDetector;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -35,7 +43,9 @@ public class GameActivity extends AppCompatActivity {
     private AppCompatImageView[] trivia_IMG_hearts;
     private MaterialTextView trivia_LBL_score;
     private MaterialTextView trivia_LBL_DistanceScore;
-
+    private LocationRequest locationRequest;
+    private  LocationCallback locationCallback;
+    private FusedLocationProviderClient fusedLocationClient;
     private MaterialButton trivia_BTN_left;
     private MaterialButton trivia_BTN_right;
     private int[] playerLives;
@@ -68,8 +78,37 @@ public class GameActivity extends AppCompatActivity {
 
         handler.postDelayed(runnable, DELAY);
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        locationRequest = new LocationRequest.Builder(5000)
+                .setMinUpdateIntervalMillis(2000)
+                .setPriority(Priority.PRIORITY_HIGH_ACCURACY)
+                .build();
 
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                Location location = locationResult.getLastLocation();
+                if (location != null) {
+                    gameManager.getScorescore().setLat(location.getLatitude());
+                    gameManager.getScorescore().setLng(location.getLongitude());
+                }
+            }
+        };
 
+        // Start location updates
+        startLocationUpdates();
+
+    }
+
+    private void startLocationUpdates() {
+        try {
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+        } catch (SecurityException e) {
+            // Handle the case where location permissions are not granted
+            // You should request permissions before calling this method
+            e.printStackTrace();
+        }
     }
 
     private void setUpControls(int i) {

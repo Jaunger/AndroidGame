@@ -2,6 +2,8 @@ package com.example.danielraby_hm1.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
+import android.util.Log;
 
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ public class ScoreboardActivity extends FragmentActivity implements OnMapReadyCa
     private ScoreFragment scoreFragment;
     private ActivityScoreboardBinding binding;
     private GoogleMap playerLocation;
+    private boolean isMapReady = false;
 
     private MaterialButton score_BTN_return;
     @Override
@@ -39,10 +42,13 @@ public class ScoreboardActivity extends FragmentActivity implements OnMapReadyCa
         scoreFragment = new ScoreFragment();
         manager.beginTransaction().replace(R.id.scorelist, scoreFragment).commit();
         scoreFragment.setScoreCallBack(score -> {
-            LatLng location = new LatLng(score.getLat(), score.getLng());
-            playerLocation.clear();
-            playerLocation.addMarker(new MarkerOptions().position(location).title("You played here!"));
-            playerLocation.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 8f));
+            if(isMapReady) {
+                LatLng location = new LatLng(score.getLat(), score.getLng());
+                playerLocation.clear();
+                playerLocation.addMarker(new MarkerOptions().position(location).title("You played here!"));
+                playerLocation.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 8f));
+
+            }
         });
 
 
@@ -64,6 +70,8 @@ public class ScoreboardActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         playerLocation = googleMap;
+        isMapReady = true;
+        Log.d("ScoreboardActivity", "onMapReady: ");
         ArrayList<Score> scores = scoreFragment.getScores();
         double lat = 0;
         double lng = 0;

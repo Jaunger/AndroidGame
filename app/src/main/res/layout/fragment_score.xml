@@ -7,19 +7,20 @@
     android:layout_height="wrap_content"
     android:background="@null">
 
-    <com.google.android.material.textview.MaterialTextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/score_img"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:background="@null"
         android:scaleType="fitCenter"
         android:gravity="center"
-        android:shadowColor="@color/black"
         android:shadowDx="0"
         android:shadowDy="0"
+
+        android:backgroundTint="#00000000"
         android:shadowRadius="7"
         android:textAlignment="gravity"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/black"
         android:textSize="40sp"
         android:textStyle="bold"
         android:text="Score:"
