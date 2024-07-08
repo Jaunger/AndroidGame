@@ -34,10 +34,6 @@
             android:value="AIzaSyAEpL47rHVoGIi1wAsWAwBiiiRJW6jpx_8" />
 
         <activity
-            android:name=".Activities.MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".Activities.ScoreboardActivity"
             android:exported="false" />
         <activity
