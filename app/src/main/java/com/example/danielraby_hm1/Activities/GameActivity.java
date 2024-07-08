@@ -1,4 +1,4 @@
-package com.example.danielraby_hm1;
+package com.example.danielraby_hm1.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 
 import com.example.danielraby_hm1.Interfaces.MoveCallback;
+import com.example.danielraby_hm1.R;
 import com.example.danielraby_hm1.Utilities.GameManager;
 import com.example.danielraby_hm1.Utilities.MoveDetector;
 import com.google.android.material.button.MaterialButton;
@@ -190,7 +191,7 @@ public class GameActivity extends AppCompatActivity {
             lose();
         }
         for (int i = 0; i < 5; i++) {
-            trivia_IMG_dangers[trivia_IMG_dangers.length-1][i].setImageResource(playerLives[gameManager.getLives()-1]);
+            trivia_IMG_dangers[trivia_IMG_dangers.length-1][i].setImageResource(playerLives[Math.max(gameManager.getLives() - 1, 0)]);
 
         }
 
@@ -201,14 +202,17 @@ public class GameActivity extends AppCompatActivity {
         Toast.makeText(this, "You lose \n Score: " + gameManager.getScore() +
                 ", Distance: " + gameManager.getDistance(), Toast.LENGTH_SHORT).show();
         vibrate();
+
         mediaPlayer[1].start();
+        gameManager.updateScoreboard(); //TODO: add location
+        startActivity(intent);
+        /*
         Runnable v = () -> {gameManager.reset(); isPaused=false;};
         isPaused = true;
-        startActivity(intent);
         handler.postDelayed(v,mediaPlayer[1].getDuration());
         gameManager.reset();
         updateDangersUI();
-        updateScoresUI();
+        updateScoresUI();*/
     }
 
     private void initiateMatrix(int rows, int cols){

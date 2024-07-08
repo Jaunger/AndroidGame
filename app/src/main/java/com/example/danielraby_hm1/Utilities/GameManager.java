@@ -2,9 +2,11 @@ package com.example.danielraby_hm1.Utilities;
 
 import com.example.danielraby_hm1.Entities.Danger;
 import com.example.danielraby_hm1.Entities.Player;
+import com.example.danielraby_hm1.Model.Score;
 import com.example.danielraby_hm1.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 
@@ -17,16 +19,15 @@ public class GameManager {
     private ArrayList<Player> playerPos = new ArrayList<>();
     private int isHit;
     private boolean hasMoved;
-    private int distance = 0;
+    private Score score;
     private int lives = 3;
-    private int score = 0;
 
     public GameManager(int rows, int cols) {
         enemies = new ArrayList<>();
         enemies.add(R.drawable.ic_bluesnail);
         enemies.add(R.drawable.ic_orangemush);
         enemies.add(R.drawable.ic_slime);
-
+        score = new Score();
 
         rewards  = new ArrayList<>();
         rewards.add(R.drawable.ic_icon);
@@ -46,7 +47,7 @@ public class GameManager {
 
         }
     }
-    public int getDistance() { return distance;}
+    public int getDistance() { return score.getDistance();}
 
 
     public int getLives() {
@@ -118,7 +119,7 @@ public class GameManager {
                 }
             }
         }
-        distance++;
+        score.incrementDistance();
     }
 
 
@@ -128,7 +129,8 @@ public class GameManager {
             return 1;
         }
         else if(rewards.contains(isHit)){
-            score += (rewards.indexOf(isHit)+1)*10;
+            score.incrementScore((rewards.indexOf(isHit)+1)*10);
+            //score += (rewards.indexOf(isHit)+1)*10;
             return 2;
         }
         return 0;
@@ -139,8 +141,8 @@ public class GameManager {
 
     public void reset() {
         setLives(3);
-        distance = 0;
-        score = 0;
+        score.setDistance(0);
+        score.setScore(0);
         for (int i = 0; i < dangersMatrix.length; i++) {
             for (int j = 0; j < dangersMatrix[0].length; j++) {
                 dangersMatrix[i][j] = new Danger().setImage(R.drawable.img_bomb).setActive(false);
@@ -150,10 +152,10 @@ public class GameManager {
     }
 
     public void incrementScore() {
-        score+= 10;
+        score.incrementScore(10);
     }
 
-    public int getScore() { return score;}
+    public int getScore() { return score.getScore();}
 
 
     public boolean getHasMoved() {
@@ -165,4 +167,19 @@ public class GameManager {
     }
 
 
+    public void updateScoreboard() {
+        ScoreSharedPreferences scoreSharedPreferences = ScoreSharedPreferences.getInstance();
+        ArrayList<Score> scores = scoreSharedPreferences.readScore();
+        if(scores == null) scores = new ArrayList<>();
+
+        scores.add(score);
+
+        Collections.sort(scores);
+
+        if (scores.size() > 10) {
+            scores.remove(scores.size() - 1);
+        }
+
+        scoreSharedPreferences.saveScore(scores);
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.danielraby_hm1;
+package com.example.danielraby_hm1.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.danielraby_hm1.R;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textview.MaterialTextView;
 
 public class MainActivity extends AppCompatActivity {
     private static final int SENSORS = 1;
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
     }
 
-    private void initViews() {
+    private void initViews() {  //TODO: have to make sure something has been chosen
         menu_BTN_sensors.setOnClickListener(v -> type = SENSORS);
         menu_BTN_buttons.setOnClickListener(v -> type = BUTTONS);
         menu_BTN_slow.setOnClickListener(v -> Delay = 1000);
@@ -46,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("type", type);
             intent.putExtra("delay", Delay);
             startActivity(intent);
+            finish();
+        });
+
+        menu_BTN_scoreboard.setOnClickListener((view)-> {
+            Intent intent = new Intent(getApplicationContext(), ScoreboardActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 
