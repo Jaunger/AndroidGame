@@ -1,7 +1,9 @@
 package com.example.danielraby_hm1.Activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.app.ActivityCompat;
 
 
 import com.example.danielraby_hm1.Interfaces.MoveCallback;
@@ -44,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
     private MaterialTextView trivia_LBL_score;
     private MaterialTextView trivia_LBL_DistanceScore;
     private LocationRequest locationRequest;
-    private  LocationCallback locationCallback;
+    private LocationCallback locationCallback;
     private FusedLocationProviderClient fusedLocationClient;
     private MaterialButton trivia_BTN_left;
     private MaterialButton trivia_BTN_right;
@@ -52,7 +55,7 @@ public class GameActivity extends AppCompatActivity {
     private MediaPlayer[] mediaPlayer;
     private boolean isPaused = false;
     private boolean sensorActive = false;
-    int rows,cols;
+    int rows, cols;
     private GameManager gameManager;
     private MoveDetector moveDetector;
     private int DELAY;
@@ -67,13 +70,13 @@ public class GameActivity extends AppCompatActivity {
         rows = 6;
         cols = 5;
         gameManager = new GameManager(rows, cols);
-        mediaPlayer = new MediaPlayer[]{ MediaPlayer.create(this, R.raw.hit_sound),
+        mediaPlayer = new MediaPlayer[]{MediaPlayer.create(this, R.raw.hit_sound),
                 MediaPlayer.create(this, R.raw.lose_sound),
                 MediaPlayer.create(this, R.raw.move),
-                MediaPlayer.create(this, R.raw.reward_soundv2)};
+                MediaPlayer.create(this, R.raw.reward_sound)};
         Intent prev = getIntent();
-        DELAY = prev.getExtras().getInt("delay");
-        initiateMatrix(rows,cols);
+        DELAY = prev.getExtras() != null ? prev.getExtras().getInt("delay") : 1000;
+        initiateMatrix(rows, cols);
         setUpControls(prev.getExtras().getInt("type"));
 
         handler.postDelayed(runnable, DELAY);
@@ -93,6 +96,7 @@ public class GameActivity extends AppCompatActivity {
                     gameManager.getScorescore().setLat(location.getLatitude());
                     gameManager.getScorescore().setLng(location.getLongitude());
                 }
+
             }
         };
 
@@ -102,13 +106,11 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void startLocationUpdates() {
-        try {
-            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
-        } catch (SecurityException e) {
-            // Handle the case where location permissions are not granted
-            // You should request permissions before calling this method
-            e.printStackTrace();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
     }
 
     private void setUpControls(int i) {
@@ -141,7 +143,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-       if(sensorActive) moveDetector.start();
+       if(sensorActive){moveDetector.start();}
         isPaused = false;
 
     }
@@ -243,7 +245,7 @@ public class GameActivity extends AppCompatActivity {
         vibrate();
 
         mediaPlayer[1].start();
-        gameManager.updateScoreboard(); //TODO: add location
+        gameManager.updateScoreboard();
         startActivity(intent);
         /*
         Runnable v = () -> {gameManager.reset(); isPaused=false;};

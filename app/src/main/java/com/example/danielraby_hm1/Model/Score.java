@@ -11,6 +11,9 @@ public class Score implements Comparable<Score> {
     public Score() {
         distance = 0;
         Score = 0;
+        lat = 32.115514949769846;
+        lng = 34.8181039;
+
     }
 
     public double getLng() {

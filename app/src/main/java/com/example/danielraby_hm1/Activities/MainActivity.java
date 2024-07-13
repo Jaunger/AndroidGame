@@ -3,6 +3,7 @@ package com.example.danielraby_hm1.Activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -17,10 +18,10 @@ import com.google.android.material.button.MaterialButton;
 public class MainActivity extends AppCompatActivity {
     private static final int SENSORS = 1;
     private static final int BUTTONS = 2;
-    int Delay;
-    int type;
+    int Delay = 0;
+    int type = 0;
 
-    private MaterialButton menu_BTN_scoreboard; //TODO: scoreboard
+    private MaterialButton menu_BTN_scoreboard;
     private MaterialButton menu_BTN_sensors;
     private MaterialButton menu_BTN_buttons;
     private MaterialButton menu_BTN_slow;
@@ -55,12 +56,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {  //TODO: have to make sure something has been chosen
-        menu_BTN_sensors.setOnClickListener(v -> type = SENSORS);
-        menu_BTN_buttons.setOnClickListener(v -> type = BUTTONS);
-        menu_BTN_slow.setOnClickListener(v -> Delay = 1000);
-        menu_BTN_fast.setOnClickListener(v -> Delay = 500);
+        menu_BTN_sensors.setOnClickListener(v -> changeType(SENSORS));
+        menu_BTN_buttons.setOnClickListener(v -> changeType(BUTTONS));
+        menu_BTN_slow.setOnClickListener(v -> ChangeDelay(1000));
+        menu_BTN_fast.setOnClickListener(v -> ChangeDelay(500));
 
         menu_BTN_launch.setOnClickListener((view) -> {
+            if(type == 0 || Delay == 0){
+                Toast.makeText(this, "Please choose a type and a delay", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Intent intent = new Intent(this, GameActivity.class);
             intent.putExtra("type", type);
             intent.putExtra("delay", Delay);
@@ -69,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         menu_BTN_scoreboard.setOnClickListener((view)-> {
-            Intent intent = new Intent(getApplicationContext(), ScoreboardActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
             startActivity(intent);
             finish();
         });
@@ -85,19 +90,41 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 999) {
-            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (requestCode == 998) {
-            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
-            }
+
+    private void changeType(int type){
+        if(type == SENSORS){
+            highlightButton(menu_BTN_sensors);
+            unselectButton(menu_BTN_buttons);
+
+            this.type = SENSORS;
+        }else{
+            highlightButton(menu_BTN_buttons);
+            unselectButton(menu_BTN_sensors);
+            this.type = BUTTONS;
         }
     }
+
+    private void ChangeDelay(int delay){
+        if(delay == 1000){
+            highlightButton(menu_BTN_slow);
+            unselectButton(menu_BTN_fast);
+            this.Delay = 1000;
+        }
+        else {
+            highlightButton(menu_BTN_fast);
+            unselectButton(menu_BTN_slow);
+            this.Delay = 500;
+        }
+    }
+    private void highlightButton(MaterialButton btn){
+        btn.setBackgroundColor(Color.BLACK);
+        btn.setTextColor(Color.WHITE);
+    }
+
+    private void unselectButton(MaterialButton btn){
+        btn.setBackgroundColor(Color.TRANSPARENT);
+        btn.setTextColor(Color.BLACK);
+    }
+
+
 }

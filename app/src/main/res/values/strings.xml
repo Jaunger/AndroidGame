@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">DanielRaby_HM1</string>
+    <string name="app_name">MapleFall</string>
     <string name="add_buttonleft">Add buttonleft</string>
     <string name="dish_dish">DISH DISH</string>
     <string name="add_buttonright">Add buttonRight</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="scoreboard">ScoreBoard</string>
     <string name="title_activity_maps">MapsActivity</string>

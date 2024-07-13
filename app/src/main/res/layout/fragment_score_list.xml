@@ -8,6 +8,6 @@
     android:layout_height="match_parent"
 
     app:layoutManager="LinearLayoutManager"
-    android:background="#4C65F2"
+    android:background="#BEFF9800"
     tools:context=".ScoreFragment"
     tools:listitem="@layout/fragment_score" />

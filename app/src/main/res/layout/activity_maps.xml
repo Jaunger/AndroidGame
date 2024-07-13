@@ -1,11 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/map2"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E7C0B4"
-    android:orientation="vertical"
-    tools:context="Activities.ScoreboardActivity">
+    tools:context=".Activities.MapsActivity">
+
+
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -17,38 +21,36 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-
-            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:background="@drawable/img_backscoreboard"
+         >
 
-            <com.google.android.material.button.MaterialButton
+            <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/score_BTN_return"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="10"
-                android:backgroundTint="#00FFFFFF"
-                android:text="Return"
+                android:background="@null"
+                android:layout_marginTop="16dp"
+                android:layout_weight="90"
+                android:scaleType="fitStart"
+                android:src="@drawable/arrow_small_left"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:layout_marginEnd="16dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/img_scoreboard"
                 />
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/main_LBL_info"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="90"
 
-            android:text="Scoreboard"
-            android:textSize="32sp" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
+
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/scorelist"
@@ -63,6 +65,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="5"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+
+
+
+
 </RelativeLayout>
