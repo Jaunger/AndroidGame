@@ -4,6 +4,15 @@
     <string name="dish_dish">DISH DISH</string>
     <string name="add_buttonright">Add buttonRight</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="scoreboard">ScoreBoard</string>
+    <string name="scoreboard">Scoreboard</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="choose_control_type">Choose Control type</string>
+    <string name="sensors">Sensors</string>
+    <string name="buttons">Buttons</string>
+    <string name="choose_speed">Choose Speed</string>
+    <string name="slow">Slow</string>
+    <string name="fast">Fast</string>
+    <string name="launch_game">Launch Game</string>
+    <string name="score">Score:</string>
+    <string name="distance">Distance:</string>
 </resources>

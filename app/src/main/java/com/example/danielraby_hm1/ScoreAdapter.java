@@ -1,7 +1,6 @@
 package com.example.danielraby_hm1;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 
 public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ScoreViewHolder> {
 
-    private ArrayList<Score> scores;
+    private final ArrayList<Score> scores;
     private ScoreCallBack scoreCallBack;
 
     public ScoreAdapter(ArrayList<Score> items) {scores = items;}

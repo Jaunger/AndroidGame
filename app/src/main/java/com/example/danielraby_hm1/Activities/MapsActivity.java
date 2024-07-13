@@ -18,7 +18,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.danielraby_hm1.databinding.ActivityMapsBinding;
-import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 
